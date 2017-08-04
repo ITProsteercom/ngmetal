@@ -18,3 +18,9 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/admin', 'HomeController@index')->name('admin');
+
+Route::get('/admin/reasons', 'ReasonsController@index');
+Route::get('/admin/reasons/create', 'ReasonsController@create');
+Route::post('/admin/reasons', 'ReasonsController@store');
+Route::get('/admin/reasons/{reason}', 'ReasonsController@edit');
+
