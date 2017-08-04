@@ -28,7 +28,7 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <textarea class="form-control" type="textarea" id="message" placeholder="Message" maxlength="140" rows="4"></textarea>
+                        <textarea class="form-control noresize" type="textarea" id="message" placeholder="Message" maxlength="140" rows="4"></textarea>
                     </div>
                     <div class="form-group">
                         <input type="file" multiple>
