@@ -47,6 +47,8 @@ class ReasonsController extends Controller
      */
     public function store(Request $request)
     {
+        $this->validate($request, ['name' => 'required']);
+
         Reason::create(['name' => $request->request->get('name')]);
 
         return redirect('/admin/reasons');

@@ -15,6 +15,15 @@
                         <tr>
                             <td>{{ ++$k  }}</td>
                             <td>{{ $reason->name }}</td>
+                            <td>
+                                <button type="button" class="btn btn-default btn-xs">
+                                  <span class="glyphicon glyphicon-edit"></span>
+                                </button>
+                            
+                                <button type="button" class="btn btn-default btn-xs">
+                                  <span class="glyphicon glyphicon-remove"></span>
+                                </button>
+                            </td>
                         </tr>
                     @endforeach
 

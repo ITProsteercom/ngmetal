@@ -12,6 +12,8 @@
 
                 {{ csrf_field() }}
 
+                @include('layouts.errors')
+
                 <div class="form-group">
                     <label for="name">Reason name:</label>
                     <input type="text" class="form-control" id="name" name="name" required>
