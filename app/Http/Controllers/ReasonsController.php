@@ -75,17 +75,21 @@ class ReasonsController extends Controller
      */
     public function update(Request $request, Reason $reason)
     {
-        //
+        $this->validate($request, ['name' => 'required']);
+
+        $reason->update($request->all());
+
+        return redirect('/admin/reasons');
     }
 
     /**
      * Remove the specified resource from storage.
-     *
-     * @param  \App\Reason  $reason
-     * @return \Illuminate\Http\Response
      */
-    public function destroy(Reason $reason)
+    public function destroy($id)
     {
-        //
+        $reason = Reason::findOrFail($id);
+        $reason->delete();
+
+        return redirect('/admin/reasons');
     }
 }
