@@ -51,7 +51,7 @@ class ReasonsController extends Controller
 
         Reason::create(['name' => $request->request->get('name')]);
 
-        return redirect('/admin/reasons');
+        return redirect()->route('reasons.list');
     }
 
 
@@ -79,7 +79,7 @@ class ReasonsController extends Controller
 
         $reason->update($request->all());
 
-        return redirect('/admin/reasons');
+        return redirect()->route('reasons.list');
     }
 
     /**
@@ -90,6 +90,6 @@ class ReasonsController extends Controller
         $reason = Reason::findOrFail($id);
         $reason->delete();
 
-        return redirect('/admin/reasons');
+        return redirect()->route('reasons.list');
     }
 }

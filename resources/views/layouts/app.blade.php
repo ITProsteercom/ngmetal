@@ -37,7 +37,12 @@
                 <div class="collapse navbar-collapse" id="app-navbar-collapse">
                     <!-- Left Side Of Navbar -->
                     <ul class="nav navbar-nav">
-                        &nbsp;
+                        @if (Request::is('admin/*'))
+                            <li><a href="{{ route('applications.list') }}">Applications</a></li>
+                            <li><a href="{{ route('reasons.list') }}">Reasons</a></li>
+                        @else
+                            <li>&nbsp;</li>
+                        @endif
                     </ul>
 
                     <!-- Right Side Of Navbar -->

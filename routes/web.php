@@ -17,11 +17,11 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/admin', 'HomeController@index')->name('admin');
+Route::get('/admin', 'HomeController@index')->name('applications.list');
 
-Route::get('/admin/reasons', 'ReasonsController@index');
+Route::get('/admin/reasons', 'ReasonsController@index')->name('reasons.list');
 Route::get('/admin/reasons/create', 'ReasonsController@create');
 Route::post('/admin/reasons', 'ReasonsController@store');
-Route::get('/admin/reasons/{reason}', array('uses' => 'ReasonsController@edit', 'as' => 'reasons.edit'));
+Route::get('/admin/reasons/{reason}', 'ReasonsController@edit')->name('reasons.edit');
 Route::patch('/admin/reasons/{reason}', 'ReasonsController@update');
-Route::delete('/admin/reasons/delete/{id}',array('uses' => 'ReasonsController@destroy', 'as' => 'reasons.delete'));
+Route::delete('/admin/reasons/delete/{id}', 'ReasonsController@destroy')->name('reasons.delete');
