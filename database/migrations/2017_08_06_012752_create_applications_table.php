@@ -15,6 +15,7 @@ class CreateApplicationsTable extends Migration
     {
         Schema::create('applications', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('package_id');
             $table->text('message');
             $table->integer('reason_id')->unsigned();
             $table->timestamp('created_at')->default(\DB::raw('CURRENT_TIMESTAMP'));

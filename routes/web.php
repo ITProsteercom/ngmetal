@@ -11,13 +11,11 @@
 |
 */
 
-Route::get('/', function () {
-    return view('index');
-});
+Route::get('/', 'HomeController@index')->name('home');
 
 Auth::routes();
 
-Route::get('/admin', 'HomeController@index')->name('applications.list');
+Route::get('/admin', 'ApplicationController@index')->name('applications.list');
 
 Route::get('/admin/reasons', 'ReasonsController@index')->name('reasons.list');
 Route::get('/admin/reasons/create', 'ReasonsController@create');

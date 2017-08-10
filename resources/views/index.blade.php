@@ -8,7 +8,8 @@
                     <br style="clear:both">
                     <h3 style="margin-bottom: 25px; text-align: center;">NG Metal</h3>
                     <div class="form-group">
-                        <input type="text" class="form-control" id="package" name="package" placeholder="Package ID" disabled required>
+                        <input type="text" class="form-control" id="package_id" name="package_id" placeholder="Package ID" value="{{ $query['p'] }}" disabled required>
+                        <input type="hidden" name="date" value="{{ $query['d'] }}">
                     </div>
                     <div class="form-group">
                         <div class="row">
