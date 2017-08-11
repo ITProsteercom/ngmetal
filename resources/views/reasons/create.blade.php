@@ -12,7 +12,7 @@
 
                 {{ csrf_field() }}
 
-                @include('layouts.errors')
+                @include('layouts.form')
 
                 <div class="form-group">
                     <label for="name">Reason name:</label>

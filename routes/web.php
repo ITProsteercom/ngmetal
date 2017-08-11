@@ -11,11 +11,11 @@
 |
 */
 
-Route::get('/', 'HomeController@index')->name('home');
+Route::get('/', 'AppController@index')->name('home');
 
 Auth::routes();
 
-Route::get('/admin', 'ApplicationController@index')->name('applications.list');
+Route::get('/admin', 'ApplicationsController@index')->name('applications.list');
 
 Route::get('/admin/reasons', 'ReasonsController@index')->name('reasons.list');
 Route::get('/admin/reasons/create', 'ReasonsController@create');

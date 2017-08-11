@@ -29,8 +29,7 @@ class ApplicationController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'name' => 'required',
-            ''
+            'package_id' => 'required',
         ]);
 
         Application::create(['name' => $request->request->get('name')]);

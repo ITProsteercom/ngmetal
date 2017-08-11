@@ -14,7 +14,7 @@
             	{{ csrf_field() }}
                 {{ method_field('PATCH') }}
 
-                @include('layouts.errors')
+                @include('layouts.form')
 
                 <div class="form-group">
                     <label for="name">Reason name:</label>
