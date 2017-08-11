@@ -776,6 +776,14 @@ __webpack_require__(9);
 //     el: '#app'
 // });
 
+$(document).ready(function () {
+
+  $(".dropdown-menu li a").click(function () {
+    $(this).parents('.dropdown').find('.btn .selected').text($(this).text());
+    $(this).parents('.dropdown').find('.btn input[type="hidden"]').val($(this).data('reason-id'));
+  });
+});
+
 /***/ }),
 /* 9 */
 /***/ (function(module, exports, __webpack_require__) {

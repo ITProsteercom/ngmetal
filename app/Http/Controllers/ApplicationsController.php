@@ -3,9 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Application;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
-class ApplicationController extends Controller
+class ApplicationsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -30,12 +31,17 @@ class ApplicationController extends Controller
     {
         $this->validate($request, [
             'package_id' => 'required',
+            'sent_date' => 'required',
+            'reason_id' => 'required',
         ]);
 
-        Application::create(['name' => $request->request->get('name')]);
+        Application::create([
+            'package_id' => intval($request->request->get('package_id')),
+            'sent_date' => Carbon::createFromTimestamp(intval($request->request->get("sent_date")))->toDateTimeString(),
+            'reason_id' => $request->request->get('reason_id'),
+            'message' => $request->request->get('message'),
+        ]);
 
-        return redirect()->route('home');
-
-        return view('reasons.edit', compact('reason'));
+        return view('layouts.success', ['message' => "Your application is successfully sent!"]);
     }
 }

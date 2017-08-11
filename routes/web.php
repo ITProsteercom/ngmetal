@@ -12,6 +12,7 @@
 */
 
 Route::get('/', 'AppController@index')->name('home');
+Route::post('/', 'ApplicationsController@store');
 
 Auth::routes();
 

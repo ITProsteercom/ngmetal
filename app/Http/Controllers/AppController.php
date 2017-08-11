@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Exceptions\CustomException;
+use App\Reason;
 use Illuminate\Http\Request;
 
 class AppController extends Controller
@@ -25,6 +26,8 @@ class AppController extends Controller
             return view('layouts.errors.page', ['error' => $e->getMessage()]);
         }
 
-        return view('index', compact('query'));
+        $reasons = Reason::All();
+
+        return view('index', compact('query', 'reasons'));
     }
 }
