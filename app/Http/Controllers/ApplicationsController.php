@@ -17,7 +17,7 @@ class ApplicationsController extends Controller
     {
         $applications = Application::all();
 
-        return view('applications.list', compact('applications'));
+        return view('applications.index', compact('applications'));
     }
 
 

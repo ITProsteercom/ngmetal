@@ -9,7 +9,7 @@
             <hr>
 
             <table class="table table-bordered table-hover ">
-                <thead>
+                <tbody>
 
                     @foreach($reasons as $k => $reason)
                         <tr>
@@ -35,7 +35,7 @@
                         </tr>
                     @endforeach
 
-                </thead>
+                </tbody>
             </table>
 
             <a href="/admin/reasons/create" class="btn btn-info" role="button">Create reason</a>
