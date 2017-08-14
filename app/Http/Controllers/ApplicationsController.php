@@ -29,33 +29,43 @@ class ApplicationsController extends Controller
      */
     public function store(Request $request)
     {
-        /*if($request->hasFile('files')) {
-            $destinationPath = '/files';
-            $files = $request->file('files');
-
-            foreach ($files as $key => $file) {
-
-                $path = $file->store($destinationPath);
-                //$path = $file->storeAs($destinationPath, $file->getClientOriginalName());
-
-            }
-
-            dd($files);
-        }*/
-
         $this->validate($request, [
             'package_id' => 'required',
             'sent_date' => 'required',
             'reason_id' => 'required',
         ]);
 
-        $res = Application::create([
+        $application = Application::create([
             'package_id' => intval($request->request->get('package_id')),
             'sent_date' => Carbon::createFromTimestamp(intval($request->request->get("sent_date")))->toDateTimeString(),
             'reason_id' => $request->request->get('reason_id'),
             'message' => $request->request->get('message'),
         ]);
-        dd($res);
+
+        if(!$application) {
+            //throw exception here that application hasn't been saved
+        }
+        else {
+
+            if($request->hasFile('files')) {
+                
+                $destinationPath = '/files';
+                $files = $request->file('files');
+
+                foreach ($files as $key => $file) {
+
+                    $path = $file->store($destinationPath);
+
+                    if($path) {
+                        $application->addFile($file->getClientOriginalName(), $path);
+                    }
+                    else
+                    {
+                        // throw exception that file hasn't been stored
+                    }
+                }
+            }
+        }
 
         return view('layouts.success', ['message' => "Your application is successfully sent!"]);
     }

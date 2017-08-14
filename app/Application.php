@@ -10,15 +10,14 @@ class Application extends Model
 
     public function files() {
 
-        return $this->hasMany(File::class);
+        return $this->hasMany(Photo::class);
     }
 
 
-    public function addFile($name, $path) {
+    public function addFile($original_name, $path) {
 
-        $this->files()->create([
-            'original_name' => $name,
-            'path' => $path,
-        ]);
+        $this->files()->create(
+            compact(['original_name', 'path'])
+        );
     }
 }
