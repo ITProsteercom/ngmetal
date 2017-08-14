@@ -8,6 +8,9 @@
 // Bootstrap
 @import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
 
+// Bootstrap Fileinput
+@import "vendor/kartik-v/bootstrap-fileinput/sass/fileinput";
+
 textarea.noresize {
   resize: none;
 }

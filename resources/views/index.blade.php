@@ -51,7 +51,7 @@
                     </div>
 
                     <div class="form-group">
-                        <input type="file" multiple>
+                        <input type="file" id="input-files" name="files[]" multiple data-show-upload="false" data-show-remove="false" required>
                     </div>
 
                     <button type="submit" id="submit" name="submit" class="btn btn-primary pull-right">Send</button>
