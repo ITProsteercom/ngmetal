@@ -12,6 +12,8 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <!-- Magnific Popup core CSS file -->
+    <link rel="stylesheet" href="{{ asset('css/magnific-popup.css') }}" rel="stylesheet">
 
 </head>
 <body>
@@ -85,6 +87,9 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
+    <!-- Bootstrap FileInput core JS file -->
     <script src="{{ asset("js/fileinput.min.js") }}"></script>
+    <!-- Magnific Popup core JS file -->
+    <script src="{{ asset("js/jquery.magnific-popup.min.js") }}"></script>
 </body>
 </html>

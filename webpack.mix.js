@@ -13,5 +13,7 @@ let mix = require('laravel-mix');
 
 mix.js('resources/assets/js/app.js', 'public/js')
     .sass('resources/assets/sass/app.scss', 'public/css')
-    .copy('vendor/kartik-v/bootstrap-fileinput/js/fileinput.min.js', 'public/js');
+    .copy('vendor/kartik-v/bootstrap-fileinput/js/fileinput.min.js', 'public/js')
+    .copy('node_modules/magnific-popup/dist/jquery.magnific-popup.min.js', 'public/js')
+    .copy('node_modules/magnific-popup/dist/magnific-popup.css', 'public/css');
 

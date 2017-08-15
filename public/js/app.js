@@ -800,6 +800,15 @@ $(document).ready(function () {
     }).on('fileselect', function (event, numFiles, label) {
         $(this).parents('.file-input').find('.file-preview-thumbnails .file-thumbnail-footer .file-upload-indicator').hide();
     });
+
+    $('.gallery').magnificPopup({
+        delegate: 'a',
+        type: 'image',
+        gallery: {
+            enabled: true,
+            navigateByImgClick: true
+        }
+    });
 });
 
 /***/ }),

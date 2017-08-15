@@ -11,7 +11,7 @@
 |
 */
 
-use Illuminate\Support\Facades\Storage;
+use Intervention\Image\Image;
 
 Route::get('/', 'AppController@index')->name('home');
 Route::post('/', 'ApplicationsController@store');
@@ -26,3 +26,8 @@ Route::post('/admin/reasons', 'ReasonsController@store');
 Route::get('/admin/reasons/{reason}', 'ReasonsController@edit')->name('reasons.edit');
 Route::patch('/admin/reasons/{reason}', 'ReasonsController@update');
 Route::delete('/admin/reasons/delete/{id}', 'ReasonsController@destroy')->name('reasons.delete');
+
+Route::get('storage/{filename}', function ($filename)
+{
+    return Image::make(storage_path('public/' . $filename))->response();
+});

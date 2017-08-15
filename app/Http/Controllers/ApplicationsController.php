@@ -62,7 +62,7 @@ class ApplicationsController extends Controller
 
                     if($path) {
                         //add file to application
-                        $application->addFile($file->getClientOriginalName(), $path);
+                        $application->addFile($file->getClientOriginalName(), basename($path));
                     }
                     else {
                         // throw exception - file hasn't been stored

@@ -31,18 +31,18 @@ class Photo extends Model
     public function resizeImage() {
 
         //get original file
-        $imagePath = Storage::path($this->path);
+        $imagePath = Storage::disk('public')->path($this->path);
 
         //resize file with auto width/height
         $image = Image::make($imagePath)->resize($this->resizeWidth, $this->resizeHeight, function ($constraint) {
             $constraint->aspectRatio();
         })->encode();
 
-        $imgResizeName = "resize_$this->path";
+        $imgResizePath = "resize/" .$this->path;
 
         //store resized file to the storage
-        if( Storage::disk('public')->put($imgResizeName, $image) ) {
-            $imageResizePath = Storage::url($imgResizeName);
+        if( Storage::disk('public')->put($imgResizePath, $image) ) {
+            $imageResizePath = Storage::url($imgResizePath);
         }
 
         return $this->resizeImage = $imageResizePath;

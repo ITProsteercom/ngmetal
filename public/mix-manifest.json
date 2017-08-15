@@ -1,5 +1,7 @@
 {
     "/js/app.js": "/js/app.js",
     "/css/app.css": "/css/app.css",
-    "/js/fileinput.min.js": "/js/fileinput.min.js"
+    "/js/fileinput.min.js": "/js/fileinput.min.js",
+    "/js/jquery.magnific-popup.min.js": "/js/jquery.magnific-popup.min.js",
+    "/css/magnific-popup.css": "/css/magnific-popup.css"
 }

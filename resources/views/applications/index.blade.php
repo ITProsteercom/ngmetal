@@ -36,9 +36,18 @@
                                 {{ $application->message }}
                             </td>
                             <td>
-                                @foreach($application->files as $file)
-                                    <img src="{{ asset($file->resizeImage()) }}" alt="{{ $file->original_name }}" title="{{ $file->original_name }}" />
-                                @endforeach
+                                <div class="gallery">
+
+                                    @foreach($application->files as $file)
+
+                                        <a href="{{ "/storage/$file->path" }}">
+                                            <img src="{{ asset($file->resizeImage()) }}"
+                                                 alt="{{ $file->original_name }}"
+                                                 title="{{ $file->original_name }}" />
+                                        </a>
+                                    @endforeach
+
+                                </div>
                             </td>
                             {{--<td>--}}
                                 {{--{{ Form::open(['route' => ['reasons.delete', $reason->id], 'method' => 'delete', 'class' => 'form-inline pull-right' ]) }}--}}
