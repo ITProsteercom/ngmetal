@@ -17,7 +17,7 @@ class CreateApplicationsTable extends Migration
             $table->increments('id');
             $table->string('package_id');
             $table->datetime('sent_date');
-            $table->text('message');
+            $table->text('message')->nullable();
             $table->integer('reason_id')->unsigned();
             $table->timestamp('created_at')->default(\DB::raw('CURRENT_TIMESTAMP'));
             $table->boolean('sent')->default(false);
