@@ -30,6 +30,9 @@ class CustomException extends Exception
         $data= [
             'bad_request' => [
                 'context'  => 'The requested resource could not be loaded. Please, scan your QR-code again.',
+            ],
+            'went_wrong' => [
+                'context'  => 'Something went wrong. Please, try again.',
             ]
         ];
         return $data[$id];

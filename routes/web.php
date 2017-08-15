@@ -16,7 +16,7 @@ Route::post('/', 'ApplicationsController@store');
 
 Auth::routes();
 
-Route::get('/admin', 'ApplicationsController@index')->name('applications.list');
+Route::get('/admin', 'ApplicationsController@index')->name('applications.list')->middleware('auth');
 
 Route::get('/admin/reasons', 'ReasonsController@index')->name('reasons.list');
 Route::get('/admin/reasons/create', 'ReasonsController@create');

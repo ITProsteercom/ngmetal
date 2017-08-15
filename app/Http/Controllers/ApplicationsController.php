@@ -43,7 +43,8 @@ class ApplicationsController extends Controller
         ]);
 
         if(!$application) {
-            //throw exception here that application hasn't been saved
+            //throw exception - application hasn't been saved
+            throw new CustomException(['went_wrong']);
         }
         else {
 
@@ -61,7 +62,8 @@ class ApplicationsController extends Controller
                     }
                     else
                     {
-                        // throw exception that file hasn't been stored
+                        // throw exception - file hasn't been stored
+                        throw new CustomException(['went_wrong']);
                     }
                 }
             }

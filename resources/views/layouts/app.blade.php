@@ -19,7 +19,7 @@
         <nav class="navbar navbar-default navbar-static-top">
             <div class="container">
                 <div class="navbar-header">
-                    @if (Request::is('admin/*'))
+                    @if (Request::is('admin', 'admin/*'))
                         <!-- Collapsed Hamburger -->
                         <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#app-navbar-collapse">
                             <span class="sr-only">Toggle Navigation</span>
@@ -38,7 +38,7 @@
                 <div class="collapse navbar-collapse" id="app-navbar-collapse">
                     <!-- Left Side Of Navbar -->
                     <ul class="nav navbar-nav">
-                        @if (Request::is('admin/*'))
+                        @if (Request::is('admin','admin/*'))
                             <li><a href="{{ route('applications.list') }}">Applications</a></li>
                             <li><a href="{{ route('reasons.list') }}">Reasons</a></li>
                         @else
@@ -49,7 +49,7 @@
                     <!-- Right Side Of Navbar -->
                     <ul class="nav navbar-nav navbar-right">
                         <!-- Authentication Links -->
-                        @if (Request::is('admin/*'))
+                        @if (Request::is('admin', 'admin/*'))
                             @if (Auth::guest())
                                 <li><a href="{{ route('login') }}">Login</a></li>
                                 <li><a href="{{ route('register') }}">Register</a></li>
