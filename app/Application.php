@@ -14,6 +14,11 @@ class Application extends Model
     }
 
 
+    public function reason() {
+        return $this->belongsTo(Reason::class);
+    }
+
+
     public function addFile($original_name, $path) {
 
         $this->files()->create(

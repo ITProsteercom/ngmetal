@@ -15,7 +15,7 @@ class ApplicationsController extends Controller
      */
     public function index()
     {
-        $applications = Application::all();
+        $applications = Application::with('reason')->get();//all();
         $applications->load('files');
 
         return view('applications.index', compact('applications'));

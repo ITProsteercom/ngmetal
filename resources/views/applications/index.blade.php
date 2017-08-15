@@ -30,7 +30,7 @@
                                 {{ $application->sent_date }}
                             </td>
                             <td>
-                                {{ $application->reason_id }}
+                                {{ $application->reason->name }}
                             </td>
                             <td>
                                 {{ $application->message }}
