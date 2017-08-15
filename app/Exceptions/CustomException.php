@@ -31,7 +31,7 @@ class CustomException extends Exception
             'bad_request' => [
                 'context'  => 'The requested resource could not be loaded. Please, scan your QR-code again.',
             ],
-            'went_wrong' => [
+            'something_went_wrong' => [
                 'context'  => 'Something went wrong. Please, try again.',
             ]
         ];

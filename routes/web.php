@@ -11,6 +11,8 @@
 |
 */
 
+use Illuminate\Support\Facades\Storage;
+
 Route::get('/', 'AppController@index')->name('home');
 Route::post('/', 'ApplicationsController@store');
 
