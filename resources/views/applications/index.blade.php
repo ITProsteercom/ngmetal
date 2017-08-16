@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
     <div class="row">
-        <div class="col-md-6 col-md-offset-3">
+        <div class="col-md-12">
 
             <h1>Applications</h1>
 
@@ -17,6 +17,7 @@
                     <th>Reason</th>
                     <th>Message</th>
                     <th>Files</th>
+                    <th>Actions</th>
                 </thead>
 
                 <tbody>
@@ -49,22 +50,18 @@
 
                                 </div>
                             </td>
-                            {{--<td>--}}
-                                {{--{{ Form::open(['route' => ['reasons.delete', $reason->id], 'method' => 'delete', 'class' => 'form-inline pull-right' ]) }}--}}
+                            <td>
+                                {{ Form::open(['route' => ['applications.delete', $application->id], 'method' => 'delete', 'class' => 'form-inline pull-right' ]) }}
 
-                                {{--<div class="form-group">--}}
-                                    {{--<a href="{{route('reasons.edit', ['id' => $reason->id]) }}" role="button" class="btn btn-default btn-xs">--}}
-                                        {{--<span class="glyphicon glyphicon-edit"></span>--}}
-                                    {{--</a>--}}
+                                <div class="form-group">
+                                    <button class="btn btn-default">
+                                        <span class="glyphicon glyphicon-remove"></span>
+                                    </button>
+                                </div>
 
-                                    {{--<button class="btn btn-default btn-xs">--}}
-                                        {{--<span class="glyphicon glyphicon-remove"></span>--}}
-                                    {{--</button>--}}
-                                {{--</div>--}}
+                                {{ Form::close() }}
 
-                                {{--{{ Form::close() }}--}}
-
-                            {{--</td>--}}
+                            </td>
                         </tr>
                     @endforeach
 

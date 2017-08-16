@@ -39,6 +39,7 @@ class ReasonsController extends Controller
         return view('reasons.create');
     }
 
+
     /**
      * Store a newly created resource in storage.
      *

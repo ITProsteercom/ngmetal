@@ -3,9 +3,15 @@
 namespace App;
 
 
+use App\Events\ApplicationOnDelete;
+
+
 class Application extends Model
 {
     public $timestamps = false;
+    protected $events = [
+        'deleting' => ApplicationOnDelete::class,
+    ];
 
 
     public function files() {

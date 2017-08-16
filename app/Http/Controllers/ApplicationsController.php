@@ -6,6 +6,7 @@ use App\Application;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
+
 class ApplicationsController extends Controller
 {
     /**
@@ -15,7 +16,7 @@ class ApplicationsController extends Controller
      */
     public function index()
     {
-        $applications = Application::with('reason')->get();//all();
+        $applications = Application::with('reason')->get();
         $applications->load('files');
 
         return view('applications.index', compact('applications'));
@@ -73,6 +74,15 @@ class ApplicationsController extends Controller
         }
 
         return view('layouts.success', ['message' => "Your application is successfully sent!"]);
+    }
+
+
+    public function destroy($id)
+    {
+        $application = Application::findOrFail($id);
+        $application->delete();
+
+        return redirect()->route('applications.list');
     }
 
 
