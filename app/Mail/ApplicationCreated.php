@@ -53,10 +53,6 @@ class ApplicationCreated extends Mailable
         // $attach files to email
         foreach($application->files as $file) {
 
-            $filepath = Storage::disk('public')->url($file->path);
-
-            //dd($filepath);
-
             $email->attach('storage/'.$file->path);
         }
 

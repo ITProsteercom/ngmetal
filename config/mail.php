@@ -55,8 +55,10 @@ return [
     |
     */
 
+    'ADMIN_EMAIL' => env('ADMIN_EMAIL'),
+
     'from' => [
-        'address' => env('MAIL_FROM_ADDRESS', 'admin@ngmetal.com'),
+        'address' => env('MAIL_FROM_ADDRESS'),
         'name' => env('MAIL_FROM_NAME', env('APP_NAME', 'NgMetal')),
     ],
 
