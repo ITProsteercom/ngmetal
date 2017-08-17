@@ -16,7 +16,7 @@ return [
     |
     */
 
-    'driver' => env('MAIL_DRIVER', 'sendmail'),
+    'driver' => env('MAIL_DRIVER', 'mail'),
 
     /*
     |--------------------------------------------------------------------------
@@ -57,7 +57,7 @@ return [
 
     'from' => [
         'address' => env('MAIL_FROM_ADDRESS', 'admin@ngmetal.com'),
-        'name' => env('MAIL_FROM_NAME', 'NG Metal'),
+        'name' => env('MAIL_FROM_NAME', env('APP_NAME', 'NgMetal')),
     ],
 
     /*

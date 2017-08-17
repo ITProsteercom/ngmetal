@@ -75,8 +75,7 @@ class ApplicationsController extends Controller
             }
 
             //send emain to admin
-            $emailto = 'yura.kalishchuk@gmail.com';
-            Mail::to($emailto)->send(new ApplicationCreated($application));
+            Mail::to(env(ADMIN_EMAIL))->send(new ApplicationCreated($application));
         }
 
         return view('layouts.success', ['message' => "Your application is successfully sent!"]);
