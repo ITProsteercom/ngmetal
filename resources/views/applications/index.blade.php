@@ -13,10 +13,11 @@
                 <thead>
                     <th>№</th>
                     <th>Package ID</th>
-                    <th>Purchase Date</th>
+                    <th>Packing Date</th>
                     <th>Reason</th>
                     <th>Message</th>
                     <th>Files</th>
+                    <th>Date & Time</th>
                     <th>Actions</th>
                 </thead>
 
@@ -49,6 +50,9 @@
                                     @endforeach
 
                                 </div>
+                            </td>
+                            <td>
+                                {{ $application->created_at }}
                             </td>
                             <td>
                                 {{ Form::open(['route' => ['applications.delete', $application->id], 'method' => 'delete', 'class' => 'form-inline pull-right' ]) }}
