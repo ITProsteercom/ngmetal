@@ -18,7 +18,7 @@ class ApplicationsController extends Controller
      */
     public function index()
     {
-        $applications = Application::with('reason')->get();
+        $applications = Application::with('reason')->paginate(10);
         $applications->load('files');
 
         return view('applications.index', compact('applications'));

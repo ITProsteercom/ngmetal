@@ -72,6 +72,10 @@
                 </tbody>
             </table>
 
+            <div class="text-center">
+                {{ $applications->links() }}
+            </div>
+
         </div>
     </div>
 </div>
