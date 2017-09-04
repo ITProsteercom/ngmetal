@@ -40,7 +40,7 @@ $(document).ready(function() {
         'maxFileCount': 5,
         'validateInitialCount': true,
         'overwriteInitial': false,
-        'maxFileSize': 5000,
+        'maxFileSize': 15000,
         'allowedFileExtensions': ["jpg", "png", "gif"]
     }).on('fileselect', function(event, numFiles, label) {
         $(this).parents('.file-input').find('.file-preview-thumbnails .file-thumbnail-footer .file-upload-indicator').hide();
