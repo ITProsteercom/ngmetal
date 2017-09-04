@@ -30,6 +30,8 @@ class Photo extends Model
      */
     public function resizeImage() {
 
+        ini_set('memory_limit','512M');
+
         //get original file
         $imagePath = Storage::disk('public')->path($this->path);
 

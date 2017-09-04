@@ -29,7 +29,7 @@
                                 {{ $application->package_id }}
                             </td>
                             <td>
-                                {{ $application->sent_date }}
+                                {{ $application->sentDate() }}
                             </td>
                             <td>
                                 {{ $application->reason->name }}

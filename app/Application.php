@@ -4,6 +4,7 @@ namespace App;
 
 
 use App\Events\ApplicationOnDelete;
+use Carbon\Carbon;
 
 
 class Application extends Model
@@ -22,6 +23,10 @@ class Application extends Model
 
     public function reason() {
         return $this->belongsTo(Reason::class);
+    }
+
+    public function sentDate() {
+        return Carbon::createFromFormat('Y-m-d H:i:s', $this->sent_date)->toDateString();
     }
 
 
