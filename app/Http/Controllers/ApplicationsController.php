@@ -18,7 +18,7 @@ class ApplicationsController extends Controller
      */
     public function index()
     {
-        $applications = Application::with('reason')->paginate(10);
+        $applications = Application::with('reason')->latest()->paginate(10);
         $applications->load('files');
 
         return view('applications.index', compact('applications'));
@@ -93,7 +93,7 @@ class ApplicationsController extends Controller
         $application = Application::findOrFail($id);
         $application->delete();
 
-        return redirect()->route('applications.list');
+        return back();;
     }
 
 
