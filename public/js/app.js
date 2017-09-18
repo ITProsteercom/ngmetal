@@ -784,7 +784,9 @@ $(document).ready(function () {
     });
 
     $("#input-files").fileinput({
-        'uploadUrl': '/storage/temp/',
+        'uploadUrl': '/fileupload',
+        'deleteUrl': '/fi',
+        'ajaxDeleteSettings': { 'method': "DELETE" },
         'dropZoneEnabled': false,
         'fileActionSettings': {
             'showDrag': false,
@@ -793,47 +795,45 @@ $(document).ready(function () {
             'showDelete': true
         },
         'maxFileCount': 5,
-        'validateInitialCount': true,
         'overwriteInitial': false,
+        'autoReplace': true,
+        'initialPreview': [],
+        'initialPreviewAsData': true,
+        'initialPreviewFileType': 'image',
+        'initialPreviewConfig': [],
         'maxFileSize': 15000,
         'allowedFileExtensions': ["jpg", "jpeg", "png", "gif"],
         'uploadExtraData': {
-              '_token': $('meta[name="csrf-token"]').attr('content')
+            '_token': $('meta[name="csrf-token"]').attr('content')
         },
-        'mergeAjaxCallbacks': 'after',
-        'ajaxSettings': {
-          'success': function(responce) {
-            var input = $('#file_id'),
-                ids = input.val();
-
-                if(ids.length) {
-
-                  ids = ids.split(',');
-                  res = ids.concat(responce.id);
-                }
-                else {
-                  res = responce.id;
-                }
-
-                input.val(res.join(','));
-
-            console.log(res.join(','));
-            return true;
-          }
-        }
+      // 'mergeAjaxCallbacks': 'after',
+      // 'mergeAjaxDeleteCallbacks': 'before',
+      'uploadAsync': true,
     }).on('fileselect', function (event, numFiles, label) {
-      console.log('fileselect');
       $(this).parents('.file-input').find('.file-preview-thumbnails .file-thumbnail-footer .file-upload-indicator').hide();
-    }).on('filebatchpreupload', function(event, data, previewId, index) {
+      $(this).fileinput('upload');
+    }).on('filebatchuploadsuccess', function(event, data, previewId, index) {
       var form = data.form, files = data.files, extra = data.extra,
-        response = data.response, reader = data.reader;
-      console.log('File uploaded triggered');
-      console.log(form);
-      console.log(files);
-      console.log(extra);
+          response = data.response, reader = data.reader;
+
+      if(response.id.length) {
+        var input = $('#file_id'),
+            ids = input.val();
+
+        if(ids.length) {
+          ids = ids.split(',');
+          res = ids.concat(response.id);
+        }
+        else {
+          res = response.id;
+        }
+
+        input.val(res.join(','));
+      }
     });
 
-    $('.gallery').magnificPopup({
+
+  $('.gallery').magnificPopup({
         delegate: 'a',
         type: 'image',
         gallery: {

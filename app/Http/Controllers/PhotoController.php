@@ -27,6 +27,18 @@ class PhotoController extends Controller
             $id[] = $photo->id;
         }
 
-        return json_encode(['id' => $id]);
+        return json_encode([
+            //'error' => '',
+            'initialPreview' => ['/storage/'.$photo->path],
+            'initialPreviewConfig' => [
+                'caption' => $photo->original_name,
+                'width' => '120px',
+                'url' => '/fileremove/'.$photo->id, // server delete action
+                'key' => '0',
+                //'extra' => ['id' => $id]
+            ],
+            //'append' => true,
+            //'id' => $id,
+        ]);
     }
 }

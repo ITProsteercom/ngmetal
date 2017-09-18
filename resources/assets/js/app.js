@@ -29,20 +29,41 @@ $(document).ready(function() {
     });
 
     $("#input-files").fileinput({
-        'uploadUrl': '/files/',
+        'uploadUrl': '/storage/temp/',
         'dropZoneEnabled': false,
         'fileActionSettings': {
             'showDrag': false,
             'showZoom': true,
             'showUpload': false,
-            'showDelete': true,
+            'showDelete': true
         },
         'maxFileCount': 5,
         'validateInitialCount': true,
-        'overwriteInitial': false,
+        'overwriteInitial': true,
         'maxFileSize': 15000,
-        'allowedFileExtensions': ["jpg", "jpeg", "png", "gif"]
-    }).on('fileselect', function(event, numFiles, label) {
+        'allowedFileExtensions': ["jpg", "jpeg", "png", "gif"],
+        'uploadExtraData': {
+            '_token': $('meta[name="csrf-token"]').attr('content')
+        },
+        'mergeAjaxCallbacks': 'after',
+        'mergeAjaxDeleteCallbacks': 'before',
+        'ajaxSettings': {
+            'success': function(responce) {
+                var input = $('#file_id'),
+                    ids = input.val();
+
+                if(ids.length) {
+                    ids = ids.split(',');
+                    res = ids.concat(responce.id);
+                }
+                else {
+                    res = responce.id;
+                }
+
+                input.val(res.join(','));
+            }
+        }
+    }).on('fileselect', function (event, numFiles, label) {
         $(this).parents('.file-input').find('.file-preview-thumbnails .file-thumbnail-footer .file-upload-indicator').hide();
     });
 

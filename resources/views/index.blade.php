@@ -51,7 +51,7 @@
                     </div>
 
                     <div class="form-group">
-                        <input type="file" id="input-files" name="files[]" multiple data-show-upload="true" data-show-remove="false" required>
+                        <input type="file" id="input-files" name="files[]" multiple data-show-upload="false" data-show-remove="false" required>
                         <input type="hidden" id="file_id" name="file_id" value="">
                     </div>
 

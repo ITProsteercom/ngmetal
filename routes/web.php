@@ -32,5 +32,6 @@ Route::get('storage/{filename}', function ($filename)
 {
     return Image::make(storage_path('public/' . $filename))->response();
 });
+Route::post('/fileupload', 'PhotoController@store');
+Route::post('/filedelete/{id}', 'PhotoController@delete');
 
-Route::post('storage/temp/', 'PhotoController@store');
