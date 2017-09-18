@@ -784,7 +784,7 @@ $(document).ready(function () {
     });
 
     $("#input-files").fileinput({
-        'uploadUrl': '/files/',
+        'uploadUrl': '/storage/temp/',
         'dropZoneEnabled': false,
         'fileActionSettings': {
             'showDrag': false,
@@ -796,9 +796,41 @@ $(document).ready(function () {
         'validateInitialCount': true,
         'overwriteInitial': false,
         'maxFileSize': 15000,
-        'allowedFileExtensions': ["jpg", "jpeg", "png", "gif"]
+        'allowedFileExtensions': ["jpg", "jpeg", "png", "gif"],
+        'uploadExtraData': {
+              '_token': $('meta[name="csrf-token"]').attr('content')
+        },
+        'mergeAjaxCallbacks': 'after',
+        'ajaxSettings': {
+          'success': function(responce) {
+            var input = $('#file_id'),
+                ids = input.val();
+
+                if(ids.length) {
+
+                  ids = ids.split(',');
+                  res = ids.concat(responce.id);
+                }
+                else {
+                  res = responce.id;
+                }
+
+                input.val(res.join(','));
+
+            console.log(res.join(','));
+            return true;
+          }
+        }
     }).on('fileselect', function (event, numFiles, label) {
-        $(this).parents('.file-input').find('.file-preview-thumbnails .file-thumbnail-footer .file-upload-indicator').hide();
+      console.log('fileselect');
+      $(this).parents('.file-input').find('.file-preview-thumbnails .file-thumbnail-footer .file-upload-indicator').hide();
+    }).on('filebatchpreupload', function(event, data, previewId, index) {
+      var form = data.form, files = data.files, extra = data.extra,
+        response = data.response, reader = data.reader;
+      console.log('File uploaded triggered');
+      console.log(form);
+      console.log(files);
+      console.log(extra);
     });
 
     $('.gallery').magnificPopup({
