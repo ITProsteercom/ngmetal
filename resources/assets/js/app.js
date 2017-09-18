@@ -29,7 +29,9 @@ $(document).ready(function() {
     });
 
     $("#input-files").fileinput({
-        'uploadUrl': '/storage/temp/',
+        'uploadUrl': '/fileupload',
+        'deleteUrl': '/fi',
+        'ajaxDeleteSettings': { 'method': "DELETE" },
         'dropZoneEnabled': false,
         'fileActionSettings': {
             'showDrag': false,
@@ -38,33 +40,42 @@ $(document).ready(function() {
             'showDelete': true
         },
         'maxFileCount': 5,
-        'validateInitialCount': true,
-        'overwriteInitial': true,
+        'overwriteInitial': false,
+        'uploadExtraData': function(previewId, index) {
+            return {
+                'key': index,
+                '_token': $('meta[name="csrf-token"]').attr('content')
+            };
+        },
+        'autoReplace': true,
+        'initialPreviewAsData': true,
+        'initialPreviewFileType': 'image',
         'maxFileSize': 15000,
         'allowedFileExtensions': ["jpg", "jpeg", "png", "gif"],
-        'uploadExtraData': {
-            '_token': $('meta[name="csrf-token"]').attr('content')
-        },
-        'mergeAjaxCallbacks': 'after',
-        'mergeAjaxDeleteCallbacks': 'before',
-        'ajaxSettings': {
-            'success': function(responce) {
-                var input = $('#file_id'),
-                    ids = input.val();
-
-                if(ids.length) {
-                    ids = ids.split(',');
-                    res = ids.concat(responce.id);
-                }
-                else {
-                    res = responce.id;
-                }
-
-                input.val(res.join(','));
-            }
-        }
+        // 'mergeAjaxCallbacks': 'after',
+        // 'mergeAjaxDeleteCallbacks': 'before',
+        'uploadAsync': true,
     }).on('fileselect', function (event, numFiles, label) {
         $(this).parents('.file-input').find('.file-preview-thumbnails .file-thumbnail-footer .file-upload-indicator').hide();
+        $(this).fileinput('upload');
+    }).on('filebatchuploadsuccess', function(event, data, previewId, index) {
+        var form = data.form, files = data.files, extra = data.extra,
+            response = data.response, reader = data.reader;
+
+        if(response.id.length) {
+            var input = $('#file_id'),
+                ids = input.val();
+
+            if(ids.length) {
+                ids = ids.split(',');
+                res = ids.concat(response.id);
+            }
+            else {
+                res = response.id;
+            }
+
+            input.val(res.join(','));
+        }
     });
 
     $('.gallery').magnificPopup({

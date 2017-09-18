@@ -31,11 +31,14 @@ class PhotoController extends Controller
             //'error' => '',
             'initialPreview' => ['/storage/'.$photo->path],
             'initialPreviewConfig' => [
-                'caption' => $photo->original_name,
-                'width' => '120px',
-                'url' => '/fileremove/'.$photo->id, // server delete action
-                'key' => '0',
-                //'extra' => ['id' => $id]
+                [
+                    'caption' => $photo->original_name,
+                    'width' => '120px',
+                    'url' => '/fileremove/'.$photo->id, // server delete action
+                    'key' => '0',
+                    'size' => 1232,
+                    //'extra' => ['id' => $id]
+                ]
             ],
             //'append' => true,
             //'id' => $id,

@@ -796,44 +796,46 @@ $(document).ready(function () {
         },
         'maxFileCount': 5,
         'overwriteInitial': false,
+        'uploadExtraData': function uploadExtraData(previewId, index) {
+            return {
+                'key': index,
+                '_token': $('meta[name="csrf-token"]').attr('content')
+            };
+        },
         'autoReplace': true,
-        'initialPreview': [],
         'initialPreviewAsData': true,
         'initialPreviewFileType': 'image',
-        'initialPreviewConfig': [],
         'maxFileSize': 15000,
         'allowedFileExtensions': ["jpg", "jpeg", "png", "gif"],
-        'uploadExtraData': {
-            '_token': $('meta[name="csrf-token"]').attr('content')
-        },
-      // 'mergeAjaxCallbacks': 'after',
-      // 'mergeAjaxDeleteCallbacks': 'before',
-      'uploadAsync': true,
+        // 'mergeAjaxCallbacks': 'after',
+        // 'mergeAjaxDeleteCallbacks': 'before',
+        'uploadAsync': true
     }).on('fileselect', function (event, numFiles, label) {
-      $(this).parents('.file-input').find('.file-preview-thumbnails .file-thumbnail-footer .file-upload-indicator').hide();
-      $(this).fileinput('upload');
-    }).on('filebatchuploadsuccess', function(event, data, previewId, index) {
-      var form = data.form, files = data.files, extra = data.extra,
-          response = data.response, reader = data.reader;
+        $(this).parents('.file-input').find('.file-preview-thumbnails .file-thumbnail-footer .file-upload-indicator').hide();
+        $(this).fileinput('upload');
+    }).on('filebatchuploadsuccess', function (event, data, previewId, index) {
+        var form = data.form,
+            files = data.files,
+            extra = data.extra,
+            response = data.response,
+            reader = data.reader;
 
-      if(response.id.length) {
-        var input = $('#file_id'),
-            ids = input.val();
+        if (response.id.length) {
+            var input = $('#file_id'),
+                ids = input.val();
 
-        if(ids.length) {
-          ids = ids.split(',');
-          res = ids.concat(response.id);
+            if (ids.length) {
+                ids = ids.split(',');
+                res = ids.concat(response.id);
+            } else {
+                res = response.id;
+            }
+
+            input.val(res.join(','));
         }
-        else {
-          res = response.id;
-        }
-
-        input.val(res.join(','));
-      }
     });
 
-
-  $('.gallery').magnificPopup({
+    $('.gallery').magnificPopup({
         delegate: 'a',
         type: 'image',
         gallery: {
