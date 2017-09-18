@@ -44,4 +44,15 @@ class PhotoController extends Controller
             //'id' => $id,
         ]);
     }
+
+
+    public function destroy($id)
+    {
+    	$file = Photo::findOrFail($id);
+    	Storage::disk('public')->delete($file->path);
+        
+        return json_encode([
+            'error' => '',
+        ]);
+    }
 }

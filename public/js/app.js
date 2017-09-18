@@ -784,9 +784,15 @@ $(document).ready(function () {
     });
 
     $("#input-files").fileinput({
+        'uploadAsync': true,
         'uploadUrl': '/fileupload',
-        'deleteUrl': '/fi',
-        'ajaxDeleteSettings': { 'method': "DELETE" },
+        'uploadExtraData': {
+          '_token': $('meta[name="csrf-token"]').attr('content')
+        },
+        'deleteUrl': '/filedelete/',
+        'ajaxDeleteSettings': { 
+          'data': {'_token': $('meta[name="csrf-token"]').attr('content')}
+        },
         'dropZoneEnabled': false,
         'fileActionSettings': {
             'showDrag': false,
@@ -796,20 +802,12 @@ $(document).ready(function () {
         },
         'maxFileCount': 5,
         'overwriteInitial': false,
-        'uploadExtraData': function uploadExtraData(previewId, index) {
-            return {
-                'key': index,
-                '_token': $('meta[name="csrf-token"]').attr('content')
-            };
-        },
-        'autoReplace': true,
         'initialPreviewAsData': true,
         'initialPreviewFileType': 'image',
         'maxFileSize': 15000,
         'allowedFileExtensions': ["jpg", "jpeg", "png", "gif"],
         // 'mergeAjaxCallbacks': 'after',
         // 'mergeAjaxDeleteCallbacks': 'before',
-        'uploadAsync': true
     }).on('fileselect', function (event, numFiles, label) {
         $(this).parents('.file-input').find('.file-preview-thumbnails .file-thumbnail-footer .file-upload-indicator').hide();
         $(this).fileinput('upload');
