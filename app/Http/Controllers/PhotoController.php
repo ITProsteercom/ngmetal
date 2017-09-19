@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Application;
+
 use App\Photo;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class PhotoController extends Controller
 {
@@ -12,6 +13,8 @@ class PhotoController extends Controller
     public function store(Request $request)
     {
     	$id = [];
+        $initialPreview = [];
+        $initialPreviewConfig = [];
 
     	$files = $request->file('files');
         foreach ($files as $key => $file) {
@@ -25,23 +28,23 @@ class PhotoController extends Controller
             ]);
 
             $id[] = $photo->id;
+            $initialPreview[] = Storage::url($path);
+            $initialPreviewConfig[] = [
+                'caption' => $photo->original_name,
+                'url' => '/fileremove/'.$photo->id, // server delete action
+                //'key' => $key,
+                'size' => Storage::size($path),
+                //'extra' => ['id' => $photo->id]
+            ];
+
         }
 
         return json_encode([
-            //'error' => '',
-            'initialPreview' => ['/storage/'.$photo->path],
-            'initialPreviewConfig' => [
-                [
-                    'caption' => $photo->original_name,
-                    'width' => '120px',
-                    'url' => '/fileremove/'.$photo->id, // server delete action
-                    'key' => '0',
-                    'size' => 1232,
-                    //'extra' => ['id' => $id]
-                ]
-            ],
+            'error' => '',
+            'initialPreview' => $initialPreview,
+            'initialPreviewConfig' => $initialPreviewConfig,
             //'append' => true,
-            //'id' => $id,
+            'id' => $id,
         ]);
     }
 
@@ -53,6 +56,7 @@ class PhotoController extends Controller
         
         return json_encode([
             'error' => '',
+            'id' => $id,
         ]);
     }
 }

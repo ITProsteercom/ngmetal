@@ -36,4 +36,14 @@ class Application extends Model
             compact(['original_name', 'path'])
         );
     }
+
+    public function relateFiles($files) {
+
+        foreach ($files as $file_id) {
+
+            $photo = Photo::find($file_id);
+            $photo->application_id = $this->id;
+            $photo->save();
+        }
+    }
 }

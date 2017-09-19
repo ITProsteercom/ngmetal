@@ -29,9 +29,15 @@ $(document).ready(function() {
     });
 
     $("#input-files").fileinput({
+        'uploadAsync': false,
         'uploadUrl': '/fileupload',
-        'deleteUrl': '/fi',
-        'ajaxDeleteSettings': { 'method': "DELETE" },
+        'uploadExtraData': {
+            '_token': $('meta[name="csrf-token"]').attr('content')
+        },
+        'deleteUrl': '/filedelete/',
+        'ajaxDeleteSettings': {
+            'data': {'_token': $('meta[name="csrf-token"]').attr('content')}
+        },
         'dropZoneEnabled': false,
         'fileActionSettings': {
             'showDrag': false,
@@ -41,40 +47,49 @@ $(document).ready(function() {
         },
         'maxFileCount': 5,
         'overwriteInitial': false,
-        'uploadExtraData': function(previewId, index) {
-            return {
-                'key': index,
-                '_token': $('meta[name="csrf-token"]').attr('content')
-            };
-        },
-        'autoReplace': true,
         'initialPreviewAsData': true,
         'initialPreviewFileType': 'image',
         'maxFileSize': 15000,
         'allowedFileExtensions': ["jpg", "jpeg", "png", "gif"],
-        // 'mergeAjaxCallbacks': 'after',
-        // 'mergeAjaxDeleteCallbacks': 'before',
-        'uploadAsync': true,
-    }).on('fileselect', function (event, numFiles, label) {
+    }).on('filebatchselected', function(event, files) {
         $(this).parents('.file-input').find('.file-preview-thumbnails .file-thumbnail-footer .file-upload-indicator').hide();
         $(this).fileinput('upload');
-    }).on('filebatchuploadsuccess', function(event, data, previewId, index) {
-        var form = data.form, files = data.files, extra = data.extra,
-            response = data.response, reader = data.reader;
+    }).on('filebatchuploadsuccess', function (event, data, previewId, index) {
+        var response = data.response;
 
-        if(response.id.length) {
+        if (response.id.length) {
             var input = $('#file_id'),
                 ids = input.val();
 
-            if(ids.length) {
-                ids = ids.split(',');
-                res = ids.concat(response.id);
-            }
-            else {
+            if (ids.length) {
+                res = ids.split(',')
+                    .concat(response.id)
+                    .join(',');
+            } else {
                 res = response.id;
             }
 
-            input.val(res.join(','));
+            if(res.length > 0) {
+                $(this).attr('required', false);
+                input.val(res);
+            }
+        }
+    }).on('filedeleted', function(event, key, jqXHR, data) {
+        var response = jqXHR.responseJSON;
+
+        if(response.id > 0) {
+            var input = $('#file_id'),
+                ids = input.val().split(','),
+                index = ids.indexOf(response.id);
+
+            if (index > -1) {
+                ids.splice(index, 1);
+            }
+
+            input.val(ids.join(','));
+
+            if(ids.length <= 0)
+                $(this).attr('required', true);
         }
     });
 

@@ -38,6 +38,7 @@ class ApplicationsController extends Controller
             'package_id' => 'required',
             'sent_date' => 'required',
             'reason_id' => 'required',
+            'file_id' => 'required'
         ]);
 
         //create an Application
@@ -53,25 +54,16 @@ class ApplicationsController extends Controller
             throw new CustomException(['something_went_wrong']);
         }
         else {
-            //check if file were sent through the form
-            if($request->hasFile('files')) {
 
-                $files = $request->file('files');
+            //check if files sent through the form
+            $files = explode(',', $request->file_id);
 
-                foreach ($files as $key => $file) {
-
-                    //save files ti the storage
-                    $path = $file->store('public');
-
-                    if($path) {
-                        //add file to application
-                        $application->addFile($file->getClientOriginalName(), basename($path));
-                    }
-                    else {
-                        // throw exception - file hasn't been stored
-                        throw new CustomException(['something_went_wrong']);
-                    }
-                }
+            if(count($files) > 0) {
+                $application->relateFiles($files);
+            }
+            else {
+                // throw exception - file hasn't been stored
+                throw new CustomException(['something_went_wrong']);
             }
 
             //send emain to admin
@@ -94,17 +86,5 @@ class ApplicationsController extends Controller
         $application->delete();
 
         return back();;
-    }
-
-
-    /**
-     * Relate stored file to an Application
-     *
-     * @param $original_name
-     * @param $path
-     */
-    public function addFile($original_name, $path) {
-
-       $this->files()->create(compact('original_name', 'path'));
     }
 }
