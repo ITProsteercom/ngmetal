@@ -53,6 +53,7 @@ class PhotoController extends Controller
     {
     	$file = Photo::findOrFail($id);
     	Storage::disk('public')->delete($file->path);
+    	$file->delete();
         
         return json_encode([
             'error' => '',

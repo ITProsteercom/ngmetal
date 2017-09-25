@@ -39,9 +39,10 @@ class Application extends Model
 
     public function relateFiles($files) {
 
-        foreach ($files as $file_id) {
+        $photos = Photo::find($files);
 
-            $photo = Photo::find($file_id);
+        foreach ($photos as $photo) {
+
             $photo->application_id = $this->id;
             $photo->save();
         }
