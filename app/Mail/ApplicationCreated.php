@@ -3,6 +3,7 @@
 namespace App\Mail;
 
 use App\Application;
+use App\Setting;
 use Carbon\Carbon;
 use Illuminate\Bus\Queueable;
 use Illuminate\Http\Testing\File;
@@ -39,7 +40,9 @@ class ApplicationCreated extends Mailable
         $application->load('reason');
         $application->load('files');
 
-        $email = $this->markdown('emails.application.created')
+        $email = $this->from($this->getEmailFrom())
+                    ->to($this->getEmailTo())
+                    ->markdown('emails.application.created')
                     ->with([
                         'date_created' => Carbon::now(),
                         'package_id' => $application->package_id,
@@ -57,5 +60,33 @@ class ApplicationCreated extends Mailable
         }
 
         return $email;
+    }
+
+    /**
+     * get mail address from settings or default values from env file and config
+     * @return array
+     */
+    private function getEmailFrom() {
+
+        $appName = Setting::getValue('APP_NAME');
+        $emailFromAdress = Setting::getValue('MAIL_FROM_ADDRESS');
+
+        $emailFrom = [
+            'address' => ($emailFromAdress) ?  $emailFromAdress : env('MAIL_FROM_ADDRESS'),
+            'name' => ($appName) ? $appName : config('app.name')
+        ];
+
+        return $emailFrom;
+    }
+
+    /**
+     * get admin email from settings or default value from env file
+     * @return mixed
+     */
+    private function getEmailTo() {
+
+        $adminEmail = Setting::getValue('admin_email');
+
+        return ($adminEmail) ?  $adminEmail : config('mail.ADMIN_EMAIL');
     }
 }

@@ -43,6 +43,7 @@
                         @if (Request::is('admin','admin/*'))
                             <li><a href="{{ route('applications.list') }}">Applications</a></li>
                             <li><a href="{{ route('reasons.list') }}">Reasons</a></li>
+                            <li><a href="{{ route('admin.settings') }}">Settings</a></li>
                         @else
                             <li>&nbsp;</li>
                         @endif

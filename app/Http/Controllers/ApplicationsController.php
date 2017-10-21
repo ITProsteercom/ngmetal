@@ -3,10 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Application;
+use App\Exceptions\CustomException;
 use App\Mail\ApplicationCreated;
+use App\Setting;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
+use Mockery\Exception;
 
 
 class ApplicationsController extends Controller
@@ -66,8 +69,8 @@ class ApplicationsController extends Controller
                 throw new CustomException(['something_went_wrong']);
             }
 
-            //send emain to admin
-            Mail::to(config('mail.ADMIN_EMAIL'))->send(new ApplicationCreated($application));
+            //Send email to admin
+            Mail::send(new ApplicationCreated($application));
 
             //set sent to true if email sent successfully
             if(!Mail::failures()) {

@@ -101,4 +101,9 @@ $(document).ready(function() {
             navigateByImgClick: true
         }
     });
+
+    $('.setting-edit').click(function(){
+        $(this).closest('td').prev().find('input').prop('disabled', function(i, v) { return !v; });
+        $(this).closest('td').find('button').prop('disabled', function(i, v) { return !v; });
+    });
 });

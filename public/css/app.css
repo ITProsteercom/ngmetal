@@ -9021,3 +9021,11 @@ textarea.noresize {
   margin-bottom: 3px;
 }
 
+.center {
+  text-align: center;
+}
+
+.w-100 {
+  width: 100%;
+}
+

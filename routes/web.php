@@ -28,6 +28,9 @@ Route::get('/admin/reasons/{reason}', 'ReasonsController@edit')->name('reasons.e
 Route::patch('/admin/reasons/{reason}', 'ReasonsController@update');
 Route::delete('/admin/reasons/delete/{id}', 'ReasonsController@destroy')->name('reasons.delete');
 
+Route::get('/admin/settings', 'SettingsController@index')->name('admin.settings');
+Route::patch('/admin/settings/{id}', 'SettingsController@update')->name('admin.settings.update');
+
 Route::get('storage/{filename}', function ($filename)
 {
     return Image::make(storage_path('public/' . $filename))->response();
