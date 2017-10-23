@@ -12,6 +12,8 @@
 
                     <h3 style="margin-bottom: 25px; text-align: center;">NG Metal</h3>
 
+                    <p class="center">Please, leave your feedback about this package, thank you.</p>
+
                     @include('layouts.errors.form')
 
                     <div class="form-group">
