@@ -14,28 +14,39 @@
                 <tbody>
 
                 @foreach($settings as $k => $setting)
+
                     <tr>
-                        {{ Form::open(['route' => ['admin.settings.update', $setting->id], 'method' => 'patch', 'class' => 'form-inline center' ]) }}
-                            {{ method_field('PATCH') }}
-                            <td>{{ $setting->name }}:</td>
-                            <td>
-                                <input type="text" class="w-100" name="value" value="{{ $setting->value }}" disabled>
-                            </td>
-                            <td>
-                                <div class="form-group center">
 
-                                    <a href="javascript:void(0);" role="button" class="setting-edit btn btn-default btn-xs">
-                                        <span class="glyphicon glyphicon-edit"></span>
-                                    </a>
+                        <td>{{ $setting->name }}:</td>
+                        <td>
+                            {{ Form::open(['route' => ['admin.settings.update', $setting->id], 'method' => 'patch', 'class' => 'form-inline center' ]) }}
 
-                                    <button class="btn btn-default btn-xs" disabled>
-                                        <span class="glyphicon glyphicon-floppy-disk"></span>
+                                @foreach($setting->value as $key => $value)
+                                    <input type="text" class="w-100" name="value[{{ $setting->id }}][]" value="{{ old("value.$setting->id.$key", $value) }}" disabled>
+                                @endforeach
+
+                                @if($setting->isMultiple)
+                                    <button class="btn btn-xs btn-primary w-100 add-setting-input" disabled>
+                                        <span class="glyphicon glyphicon-plus"></span>
                                     </button>
-                                </div>
-                            </td>
+                                @endif
+                            {{ Form::close() }}
+                        </td>
+                        <td>
+                            <div class="form-group center">
 
-                        {{ Form::close() }}
+                                <a href="javascript:void(0);" role="button" class="setting-edit btn btn-default btn-xs">
+                                    <span class="glyphicon glyphicon-edit"></span>
+                                </a>
+
+                                <button class="btn btn-default btn-xs save-setting" disabled>
+                                    <span class="glyphicon glyphicon-floppy-disk"></span>
+                                </button>
+                            </div>
+                        </td>
+
                     </tr>
+
                 @endforeach
 
                 </tbody>

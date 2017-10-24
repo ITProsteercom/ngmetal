@@ -855,12 +855,27 @@ $(document).ready(function () {
     });
 
     $('.setting-edit').click(function () {
-        $(this).closest('td').prev().find('input').prop('disabled', function (i, v) {
+        $(this).closest('td').prev().find('input[type="text"], button').prop('disabled', function (i, v) {
             return !v;
         });
         $(this).closest('td').find('button').prop('disabled', function (i, v) {
             return !v;
         });
+    });
+
+    $('.add-setting-input').click(function (e) {
+
+        e.preventDefault();
+
+        var input = $(this).prev().clone(false);
+
+        $(input).val('').insertBefore($(this));
+    });
+
+    $('.save-setting').click(function () {
+
+        var form = $(this).closest('td').prev().find('form');
+        form.submit();
     });
 });
 

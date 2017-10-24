@@ -19,6 +19,7 @@ class CreateSettingsTable extends Migration
             $table->string('code');
             $table->string('value');
             $table->boolean('isEmail')->default(false);
+            $table->boolean('isMultiple')->default(false);
         });
     }
 
