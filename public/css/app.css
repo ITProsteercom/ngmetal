@@ -9029,3 +9029,7 @@ textarea.noresize {
   width: 100%;
 }
 
+.edit-buttons {
+  width: 55px;
+}
+

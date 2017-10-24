@@ -29,7 +29,7 @@ class SettingsTableSeeder extends Seeder
         Setting::create([
                 'name' => 'Admin email',
                 'code' => 'ADMIN_EMAIL',
-                'value' => ['admin@admin.dev' , 'yura.kalishchuk@gmail.com'],
+                'value' => ['admin@admin.dev'],
                 'isEmail' => true,
                 'isMultiple' => true
             ]);

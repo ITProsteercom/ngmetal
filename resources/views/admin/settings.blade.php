@@ -17,8 +17,8 @@
 
                     <tr>
 
-                        <td>{{ $setting->name }}:</td>
-                        <td>
+                        <td  class="col-md-3">{{ $setting->name }}:</td>
+                        <td  class="col-md-6">
                             {{ Form::open(['route' => ['admin.settings.update', $setting->id], 'method' => 'patch', 'class' => 'form-inline center' ]) }}
 
                                 @foreach($setting->value as $key => $value)
@@ -26,14 +26,17 @@
                                 @endforeach
 
                                 @if($setting->isMultiple)
+
+                                    <input type="text" class="w-100" name="value[{{ $setting->id }}][]" value="" disabled>
+
                                     <button class="btn btn-xs btn-primary w-100 add-setting-input" disabled>
                                         <span class="glyphicon glyphicon-plus"></span>
                                     </button>
                                 @endif
                             {{ Form::close() }}
                         </td>
-                        <td>
-                            <div class="form-group center">
+                        <td class="col-md-1">
+                            <div class="form-group center edit-buttons">
 
                                 <a href="javascript:void(0);" role="button" class="setting-edit btn btn-default btn-xs">
                                     <span class="glyphicon glyphicon-edit"></span>
