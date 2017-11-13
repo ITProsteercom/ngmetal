@@ -11,6 +11,9 @@
 // Bootstrap Fileinput
 @import "vendor/kartik-v/bootstrap-fileinput/sass/fileinput";
 
+body {
+  color: #000;
+}
 textarea.noresize {
   resize: none;
 }
@@ -27,4 +30,10 @@ textarea.noresize {
 }
 .edit-buttons {
   width: 55px;
+}
+
+#dropdownMenuReasons {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }

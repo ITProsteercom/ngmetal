@@ -10,27 +10,35 @@
 
                     <br style="clear:both">
 
-                    <h3 style="margin-bottom: 25px; text-align: center;">NG Metal</h3>
+                    <h3 style="margin-bottom: 25px; text-align: center;"><strong>NG Metal</strong></h3>
 
-                    <p class="center">Please, leave your feedback about this package, thank you.</p>
+                    <p class="center">
+                        <strong>Please, leave your feedback about this package, thank you.</strong>
+                    </p>
 
                     @include('layouts.errors.form')
 
                     <div class="form-group">
-                        <input type="text" class="form-control" id="package_id" name="package_id" placeholder="Package ID" value="{{ $query['p'] }}" readonly required>
-                        <input type="hidden" name="sent_date" value="{{ $query['d'] }}">
+                        <div class="row">
+                            <label class="col-xs-6">Package number:</label>
+
+                            <div class="col-xs-6">
+                                <input type="text" class="form-control" id="package_id" name="package_id" placeholder="Package ID" value="{{ $query['p'] }}" readonly required>
+                                <input type="hidden" name="sent_date" value="{{ $query['d'] }}">
+                            </div>
+                        </div>
                     </div>
 
                     <div class="form-group">
                         <div class="row">
 
-                            <label class="col-sm-6">Choose your appeal reason:</label>
+                            <label class="col-xs-6">Choose your reason:</label>
 
-                            <div class="col-sm-6">
+                            <div class="col-xs-6">
 
-                                <div class="dropdown pull-right">
+                                <div class="dropdown pull-right w-100">
 
-                                    <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenuReasons" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                    <button class="btn btn-default dropdown-toggle w-100" type="button" id="dropdownMenuReasons" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                                         <input type="hidden" name="reason_id" id="reason_id" value="{{ $reasons[0]->id }}">
                                         <span class="selected">{{ $reasons[0]->name }}</span>
                                         <span class="caret"></span>
