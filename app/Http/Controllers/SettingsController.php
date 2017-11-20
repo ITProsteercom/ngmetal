@@ -24,20 +24,30 @@ class SettingsController extends Controller
 
         $setting = Setting::findOrFail($id);
 
+        //trim all values
         $value = array_filter($request->get("value")[$id]);
 
         $rules = 'required';
 
-        if($setting->isEmail) {
-            $rules .= "|email";
-
-            $value = array_map(function($email) {
-                return trim($email);
-            }, $value);
+        //check multiple fields for emptiness to exclude from validation
+        if($setting->isMultiple) {
+            foreach ($request->get("value")[$id] as $key => $input)
+                if (empty($input))
+                    $except[] = "value.$id.$key";
         }
 
+        if($setting->isEmail)
+            $rules .= "|email";
+
+        //get request for validation
+        if(!empty($except))
+            $request = $request->except($except);
+        else
+            $request = $request->all();
+
+        //validate
         $validator = Validator::make(
-            $request->all(),
+            $request,
             ["value.$id.*"  => $rules],
             ['required' => 'The :attribute field is required.'],
             ["value.$id.*" => Setting::find($id)->name]
