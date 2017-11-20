@@ -22,4 +22,16 @@ class Setting extends Model
 
         return (count($setting->value) == 1)? $setting->value[0] : $setting->value;
     }
+
+    public static function getAll() {
+
+        $settings = static::alL('code', 'value');
+
+        $app_settings = [];
+        foreach ($settings as $setting) {
+            $app_settings[$setting['code']] = $setting['value'];
+        }
+
+        return $app_settings;
+    }
 }

@@ -10,7 +10,7 @@
 
                     <br style="clear:both">
 
-                    <h3 style="margin-bottom: 25px; text-align: center;"><strong>NG Metal</strong></h3>
+                    <h3 style="margin-bottom: 25px; text-align: center;"><strong>{{ getSetting('APP_NAME') }}</strong></h3>
 
                     <p class="center">
                         <strong>Please, leave your feedback about this package, thank you.</strong>
