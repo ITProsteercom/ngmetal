@@ -40,7 +40,9 @@ class ApplicationCreated extends Mailable
         $application->load('reason');
         $application->load('files');
 
-        $email = $this->from($this->getEmailFrom())
+        $emailFrom = $this->getEmailFrom();
+
+        $email = $this->from($emailFrom['address'], $emailFrom['name'])
                     ->to($this->getEmailTo())
                     ->markdown('emails.application.created')
                     ->with([
@@ -50,10 +52,9 @@ class ApplicationCreated extends Mailable
                         'reason' => $application->reason->name,
                         'mess' => $application->message,
                         'url' => URL::to('/admin')
-
                     ]);
 
-        // $attach files to email
+        // attach files to email
         foreach($application->files as $file) {
 
             $email->attach('storage/'.$file->path);
@@ -69,10 +70,10 @@ class ApplicationCreated extends Mailable
     private function getEmailFrom() {
 
         $appName = Setting::getValue('APP_NAME');
-        $emailFromAdress = Setting::getValue('MAIL_FROM_ADDRESS');
+        $emailFromAddress = Setting::getValue('MAIL_FROM_ADDRESS');
 
         $emailFrom = [
-            'address' => ($emailFromAdress) ?  $emailFromAdress : env('MAIL_FROM_ADDRESS'),
+            'address' => ($emailFromAddress) ?  $emailFromAddress : env('MAIL_FROM_ADDRESS'),
             'name' => ($appName) ? $appName : config('app.name')
         ];
 

@@ -59,7 +59,7 @@ return [
 
     'from' => [
         'address' => env('MAIL_FROM_ADDRESS'),
-        'name' => env('MAIL_FROM_NAME', env('APP_NAME', 'NgMetal')),
+        'name' => env('MAIL_FROM_NAME', env('APP_NAME', 'Ng Metal')),
     ],
 
     /*
