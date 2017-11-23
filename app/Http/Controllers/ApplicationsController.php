@@ -41,7 +41,7 @@ class ApplicationsController extends Controller
             'package_id' => 'required',
             'sent_date' => 'required',
             'reason_id' => 'required',
-            'file_id' => 'required'
+            //'file_id' => 'required'
         ]);
 
         //create an Application

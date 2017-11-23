@@ -822,10 +822,10 @@ $(document).ready(function () {
                 res = response.id;
             }
 
-            if (res.length > 0) {
-                $(this).attr('required', false);
-                input.val(res);
-            }
+            // if(res.length > 0) {
+            //     $(this).attr('required', false);
+            //     input.val(res);
+            // }
         }
     }).on('filedeleted', function (event, key, jqXHR, data) {
         var response = jqXHR.responseJSON;
@@ -841,7 +841,8 @@ $(document).ready(function () {
 
             input.val(ids.join(','));
 
-            if (ids.length <= 0) $(this).attr('required', true);
+            // if(ids.length <= 0)
+            //     $(this).attr('required', true);
         }
     });
 
